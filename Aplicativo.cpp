@@ -6,9 +6,9 @@ using namespace std;
 
 string Formato="";
 
-void EscribirSecuencia(string Id, string Secuencia)
+void EscribiCadena(string Id, string Cadena)
 {
-	cout<<"\n================================================================================\nId: "<< Id <<"\nSecuencia: "<< Secuencia;	
+	cout<<"\n---------------------------------------------------------------------------------\nId: "<< Id <<"\nCadena: "<< Cadena;	
 }
 
 int main(int argc, char* argv[])
@@ -21,7 +21,7 @@ int main(int argc, char* argv[])
 	   {
 		   char linea[1000];		   
 		   string Id="";		   	 
-		   string Secuencia;
+		   string Cadena;
 		   bool esMas=false;				 
 		   while ((Formato.compare("error")!=0) && (!Archivo.eof()))
 		   { 
@@ -29,6 +29,7 @@ int main(int argc, char* argv[])
 			   	 string Aux=linea;
 			   	 if (Formato.compare("")==0)
 			   	 {
+					//diferenciador si es fasta o gastq
 					if (linea[0]=='>')
 						Formato="fasta";
 					else
@@ -45,14 +46,14 @@ int main(int argc, char* argv[])
 						 {
 							if (Id.compare("")!=0)
 							{
-								EscribirSecuencia(Id,Secuencia);
+								EscribiCadena(Id,Cadena);
 							}
 							Id=Aux.substr(1,Aux.length()-2);				 	
-							Secuencia="";
+							Cadena="";
 						 }		   	 
 						 else
 						 {
-							Secuencia.append(Aux.substr(0,Aux.length()-1));							
+							Cadena.append(Aux.substr(0,Aux.length()-1));							
 						 }
 					 }
 					 else //fastq
@@ -62,10 +63,10 @@ int main(int argc, char* argv[])
 							esMas=false;
 							if (Id.compare("")!=0)
 							{
-								EscribirSecuencia(Id,Secuencia);
+								EscribiCadena(Id,Cadena);
 							}
 							Id=Aux.substr(1,Aux.length()-1);				 	
-							Secuencia="";
+							Cadena="";
 						 }		   	 
 						 else
 						 {
@@ -75,7 +76,7 @@ int main(int argc, char* argv[])
 						    }
 							if (!esMas)
 							{
-								Secuencia.append(Aux.substr(0,Aux.length()));
+								Cadena.append(Aux.substr(0,Aux.length()));
 							}
 						 }
 					 }
@@ -84,16 +85,16 @@ int main(int argc, char* argv[])
 			}
 			if (Id.compare("")!=0)
 			{
-				EscribirSecuencia(Id,Secuencia);
+				EscribiCadena(Id,Cadena);
 			}
 	   }
 	   else
 	   {
-	   		cout<<"No se encuentra archivo\n";
+	   		cout<<"No se encuentra el archivo o no existe";
 	   }
 	}
 	else
-	  cout<<"Se debe especificar el archivo *.fasta o *.fastq\n";
+	  cout<<"se debe especificar el archivo con *.fasta o *.fastq\n";
    cout<<"\n";
    return 0;
 }
