@@ -89,11 +89,11 @@ int main(int argc, char* argv[])
 	   }
 	   else
 	   {
-	   		cout<<"El archivo no existe";
+	   		cout<<"No se encuentra archivo\n";
 	   }
 	}
 	else
-	  cout<<"Debe especificar un archivo *.fasta o *.fastq\n";
+	  cout<<"Se debe especificar el archivo *.fasta o *.fastq\n";
    cout<<"\n";
    return 0;
 }
